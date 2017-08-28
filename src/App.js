@@ -7,13 +7,15 @@ import {getStore} from './redux-stuff/global-store'
 import {  
   activateGeod,
   closeGeod,
-  gatherReducers
+  gatherReducers,
+  registerPlugin
 } from './redux-stuff/actions';
 
 // App.js
 export class App extends Component {
 
   render() {
+    let store = getStore();
     return (
       <div>
 
@@ -23,20 +25,22 @@ export class App extends Component {
           <button onClick={this.props.closeGeod}>
             Exit Geod
           </button> :
-          <button onClick={() => this.props.activateGeod({ title: 'I am a geo dude!' })}>
+          <button onClick={() => {
+           
+            store.dispatch(activateGeod({ title: 'I am a geo dude!' }))
+            this.props.activateGeod({ title: 'I am a geo dude!' })}
+          }>
             Click Me!
           </button>
        }
+       <h2>{this.props.geod.count || 'na'}</h2>
+       <button id="increment">INCREMENT</button>
+          <button id="decrement">DECREMENT</button>
        <button onClick={() => {
           
           //this.props.gatherReducers()
-          let store = getStore();
-          store.dispatch({
-            type: 'REGISTER_PLUGIN',
-            plugin:{
-              key:'dog'
-            }
-          })
+          
+          store.dispatch(registerPlugin( {key:'dog'}))
 
           }
          }>

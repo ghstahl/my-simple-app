@@ -1,10 +1,31 @@
 import { combineReducers } from 'redux'
+import {  
+    activateGeod,
+    closeGeod,
+    gatherReducers,
+    registerPlugin
+  } from './actions';
+  
+  const {
+    handleAction,handleActions
+  } = window.ReduxActions;
+
+
+
+export const geodReducer = handleActions({
+    [activateGeod]: (state, action) => {
+        return  action.payload
+    },
+  
+    [closeGeod]: (state, action) => {
+        return {title:null}}
+  }, { } );
 
 // reducers.js
-export const geodReducer = (state = {}, action) => {
+export const geodReducer2 = (state = {}, action) => {
     switch (action.type) {
         case 'ACTIVATE_GEOD':
-            return action.geod;
+            return action.payload;
         case 'CLOSE_GEOD':
             return {};
         default:
@@ -20,7 +41,7 @@ export const reducersReducer = (state = {}, action) => {
     }
 };
 let plugins = [];
-const registerPlugin = (plugin) =>{
+const registerPluginF = (plugin) =>{
     let key = plugin.key;
     if(!plugins[key]){
         plugins[key] = plugin
@@ -31,7 +52,7 @@ const registerPlugin = (plugin) =>{
 export const pluginsReducer = (state = {}, action) => {
     switch (action.type) {
         case 'REGISTER_PLUGIN':
-            return registerPlugin(action.plugin);
+            return registerPluginF(action.payload);
         default:
             return state;
     }

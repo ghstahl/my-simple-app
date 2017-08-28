@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './startup';
 import './index.css';
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 // Add these imports - Step 1
 import { Provider } from 'react-redux';  
 import { configureStore } from './redux-stuff/store';
 import { getStore } from './redux-stuff/global-store'
+import App from './App';
+
+
 
 window.p7hostGlobal = {
     store:null
