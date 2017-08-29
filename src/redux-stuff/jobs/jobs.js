@@ -1,6 +1,7 @@
 import async from 'promise-async';
 import {
-    pluginManager
+    pluginManager,
+    publishPlugins
 } from '../plugin-management';
 import {
     reducerManager
@@ -21,6 +22,7 @@ export const registerPluginJob = (plugin) => {
     ]).then(function (reducers) {
         let store = getStore();
         store.replaceReducer(reducers)
+        store.dispatch(publishPlugins())
         console.log(store) 
     }).catch(function(err) {
         console.log(err)
