@@ -1,16 +1,17 @@
-import React, {  
+import React, {
   Component,
 } from 'react';
 
 import { connect } from 'react-redux';
-import {getStore} from './redux-stuff/global-store'
-import {  
+import { getStore } from './redux-stuff/global-store'
+import {
   activateGeod,
   closeGeod,
   gatherReducers,
   registerPlugin
 } from './redux-stuff/actions';
-
+import { registerPluginJob } from './redux-stuff/jobs'
+import { plugin,testOne } from './plugins/test-plugin'
 // App.js
 export class App extends Component {
 
@@ -36,23 +37,21 @@ export class App extends Component {
        <h2>{this.props.geod.count || 'na'}</h2>
        <button id="increment">INCREMENT</button>
           <button id="decrement">DECREMENT</button>
-       <button onClick={() => {
-          
-          //this.props.gatherReducers()
-          
-          store.dispatch(registerPlugin( {key:'dog'}))
-
-          }
-         }>
-            Reload Reducers!
-          </button>
-
+       <button onClick={() => {registerPluginJob(plugin)}}>Reload Reducers!</button>
+      <button onClick={() => {
+        let action = testOne({key:'dog'})
+        store.dispatch(action)
+        }
+      }>Test One!</button>
       </div>
     );
   }
 
 }
 
+/*
+
+*/
 // AppContainer.js
 const mapStateToProps = (state, ownProps) => ({  
   geod: state.geod,

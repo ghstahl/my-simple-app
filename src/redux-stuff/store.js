@@ -5,16 +5,15 @@ import {
 import thunk from 'redux-thunk';
 import {saveStore,getStore} from './global-store'
 
-import makeRootReducer from './reducers'
+import {configureReducer} from './reducer-management/reducers'
 let state = {
-    plugins:{},
-    reducers:makeRootReducer()
+    plugins:{}
 };
-//state.reducers = makeRootReducer();
+//state.reducers = configureReducer();
 // store.js
 export function configureStore(initialState =state) {
     const store = createStore(
-        initialState.reducers,
+        configureReducer(),
         initialState,
         applyMiddleware(thunk)
     )

@@ -1,14 +1,22 @@
-import { combineReducers } from 'redux'
+
 import {  
     activateGeod,
     closeGeod,
     gatherReducers,
     registerPlugin
   } from './actions';
-  
-  const {
+
+
+import {  
+    reducerReducer,
+    configureReducer
+  } from './reducer-management/reducers';
+
+
+const {
     handleAction,handleActions
-  } = window.ReduxActions;
+} = window.ReduxActions;
+
 
 
 
@@ -32,10 +40,10 @@ export const geodReducer2 = (state = {}, action) => {
             return state;
     }
 };
-export const reducersReducer = (state = {}, action) => {
+export const reducerReducer2 = (state = {}, action) => {
     switch (action.type) {
         case 'GATHER_REDUCERS':
-            return makeRootReducer();
+            return configureReducer();
         default:
             return state;
     }
@@ -49,7 +57,7 @@ const registerPluginF = (plugin) =>{
     return plugins;
 
 }
-export const pluginsReducer = (state = {}, action) => {
+export const pluginsReducer2 = (state = {}, action) => {
     switch (action.type) {
         case 'REGISTER_PLUGIN':
             return registerPluginF(action.payload);
@@ -62,17 +70,7 @@ export const injectReducer = (store, { key, reducer }) => {
         return
   
     store.asyncReducers[key] = reducer
-    store.replaceReducer(makeRootReducer(store.asyncReducers))
+    store.replaceReducer(configureReducer(store.asyncReducers))
   }
 
-export const makeRootReducer = (asyncReducers) => {
-  return combineReducers({
-    geod:geodReducer,
-    reducers:reducersReducer,
-    plugins:pluginsReducer,
-    ...asyncReducers
-  })
-}
-
-export default makeRootReducer
 

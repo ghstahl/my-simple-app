@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "duty": "^2.5.1",
+    "isemail": "^3.0.0",
+    "joi": "^10.6.0",
+    "joi-browser": "^10.6.1",
+    "object-hash": "^1.1.8",
+    "promise-async": "^0.2.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
